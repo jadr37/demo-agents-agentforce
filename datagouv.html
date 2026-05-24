@@ -124,39 +124,6 @@
       font-size: 0.85rem;
     }
 
-    /* ===== ZONE SNIPPET ===== */
-    .snippet-zone {
-      background: #fff8e6;
-      border: 2px dashed #f0b429;
-      border-radius: 12px;
-      padding: 2rem;
-      text-align: center;
-      color: #7a5c00;
-    }
-
-    .snippet-zone h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .snippet-zone p {
-      font-size: 0.85rem;
-      line-height: 1.5;
-    }
-
-    .snippet-zone code {
-      display: inline-block;
-      margin-top: 0.75rem;
-      background: #fef3c7;
-      border: 1px solid #f0b429;
-      border-radius: 6px;
-      padding: 0.3rem 0.75rem;
-      font-size: 0.8rem;
-      font-family: monospace;
-    }
-    /* ======================== */
-
     footer {
       text-align: center;
       padding: 2rem;
@@ -193,18 +160,24 @@
       </ul>
     </div>
 
-    <!-- ============================================================
-         SNIPPET SALESFORCE — À REMPLACER
-         1. Dans Setup > Messaging for Web, copiez le code de déploiement
-         2. Remplacez toute la zone .snippet-zone ci-dessous par votre snippet
-         ============================================================ -->
-    <div class="snippet-zone">
-      <h3>🔧 Snippet Salesforce à intégrer</h3>
-      <p>Remplacez ce bloc par le snippet JavaScript généré depuis votre org Salesforce.<br/>
-      Setup → Messaging for Web → votre canal → <strong>Get Code</strong></p>
-      <code>&lt;!-- Collez ici le script Salesforce Messaging for Web --&gt;</code>
-    </div>
-    <!-- ============================================================ -->
+    <script type='text/javascript'>
+      function initEmbeddedMessaging() {
+        try {
+          embeddedservice_bootstrap.settings.language = 'fr';
+          embeddedservice_bootstrap.init(
+            '00DJ9000002Ft0p',
+            'DataGouv_Explorer',
+            'https://storm-5771c771e313ed.my.site.com/ESWDataGouvExplorer1779625045202',
+            {
+              scrt2URL: 'https://storm-5771c771e313ed.my.salesforce-scrt.com'
+            }
+          );
+        } catch (err) {
+          console.error('Error loading Embedded Messaging: ', err);
+        }
+      };
+    </script>
+    <script type='text/javascript' src='https://storm-5771c771e313ed.my.site.com/ESWDataGouvExplorer1779625045202/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
   </div>
 
