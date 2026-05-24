@@ -7,11 +7,14 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
+    html, body {
+      height: 100%;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: #f5f6fa;
       color: #1a1a2e;
-      min-height: 100vh;
+    }
+
+    body {
       display: flex;
       flex-direction: column;
     }
@@ -23,6 +26,7 @@
       display: flex;
       align-items: center;
       gap: 1rem;
+      flex-shrink: 0;
     }
 
     header a {
@@ -30,13 +34,9 @@
       text-decoration: none;
       font-size: 0.9rem;
       opacity: 0.8;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
     }
 
     header a:hover { opacity: 1; }
-
     header .separator { opacity: 0.4; }
 
     header h1 {
@@ -44,43 +44,49 @@
       font-weight: 600;
     }
 
-    .page-content {
-      max-width: 760px;
-      margin: 2.5rem auto;
-      padding: 0 1.5rem;
+    .layout {
+      display: flex;
       flex: 1;
+      overflow: hidden;
+    }
+
+    /* Colonne gauche : infos */
+    .info-panel {
+      width: 50%;
+      padding: 2rem;
+      overflow-y: auto;
+      border-right: 1px solid #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
     }
 
     .agent-header {
       display: flex;
       align-items: flex-start;
       gap: 1rem;
-      margin-bottom: 2rem;
     }
 
     .agent-icon {
-      width: 56px;
-      height: 56px;
+      width: 52px;
+      height: 52px;
       border-radius: 12px;
       background: #e8f0fe;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       flex-shrink: 0;
     }
 
     .agent-info h2 {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 700;
       margin-bottom: 0.3rem;
-      color: #1a1a2e;
-      text-transform: none;
-      letter-spacing: 0;
     }
 
     .agent-info p {
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       color: #666;
       line-height: 1.5;
     }
@@ -89,28 +95,27 @@
       background: white;
       border: 1px solid #e0e0e0;
       border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
+      padding: 1.25rem;
     }
 
     .capabilities h3 {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: #888;
-      margin-bottom: 1rem;
+      margin-bottom: 0.9rem;
     }
 
     .capabilities ul {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.55rem;
     }
 
     .capabilities li {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: #333;
       display: flex;
       align-items: center;
@@ -121,14 +126,35 @@
       content: "✓";
       color: #1a7a44;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
     }
 
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.8rem;
+    /* Colonne droite : chat */
+    .chat-panel {
+      width: 50%;
+      position: relative;
+      background: #fff;
+    }
+
+    /* Repositionne le widget SF pour qu'il remplisse la colonne droite */
+    .chat-panel embeddedservice-chat-header,
+    .chat-panel .embeddedServiceHelpButton,
+    .chat-panel .embeddedServiceSidebarMinimizedDefaultUI {
+      display: none !important;
+    }
+
+    /*
+      Le widget Salesforce s'injecte dans le DOM global.
+      On le force à se positionner dans la colonne droite.
+    */
+    .sfc-chat-container {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: #aaa;
+      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -140,50 +166,63 @@
     <h1>Data Gouv Explorer</h1>
   </header>
 
-  <div class="page-content">
+  <div class="layout">
 
-    <div class="agent-header">
-      <div class="agent-icon">🗂️</div>
-      <div class="agent-info">
-        <h2>Data Gouv Explorer</h2>
-        <p>Agent d'exploration du catalogue de données ouvertes français. Posez vos questions en langage naturel pour trouver et explorer les datasets de data.gouv.fr.</p>
+    <div class="info-panel">
+      <div class="agent-header">
+        <div class="agent-icon">🗂️</div>
+        <div class="agent-info">
+          <h2>Data Gouv Explorer</h2>
+          <p>Agent d'exploration du catalogue de données ouvertes français. Posez vos questions en langage naturel pour trouver et explorer les datasets de data.gouv.fr.</p>
+        </div>
+      </div>
+
+      <div class="capabilities">
+        <h3>Ce que l'agent peut faire</h3>
+        <ul>
+          <li>Rechercher des datasets par mots-clés ou thématique</li>
+          <li>Afficher les métadonnées et ressources d'un dataset</li>
+          <li>Consulter un aperçu des données tabulaires</li>
+          <li>Rechercher et explorer des APIs (dataservices)</li>
+        </ul>
       </div>
     </div>
 
-    <div class="capabilities">
-      <h3>Ce que l'agent peut faire</h3>
-      <ul>
-        <li>Rechercher des datasets par mots-clés ou thématique</li>
-        <li>Afficher les métadonnées et ressources d'un dataset</li>
-        <li>Consulter un aperçu des données tabulaires</li>
-        <li>Rechercher et explorer des APIs (dataservices)</li>
-      </ul>
+    <div class="chat-panel">
+      <div class="sfc-chat-container" id="chat-loading">Chargement de l'agent...</div>
     </div>
-
-    <script type='text/javascript'>
-      function initEmbeddedMessaging() {
-        try {
-          embeddedservice_bootstrap.settings.language = 'fr';
-          embeddedservice_bootstrap.init(
-            '00DJ9000002Ft0p',
-            'DataGouv_Explorer',
-            'https://storm-5771c771e313ed.my.site.com/ESWDataGouvExplorer1779625045202',
-            {
-              scrt2URL: 'https://storm-5771c771e313ed.my.salesforce-scrt.com'
-            }
-          );
-        } catch (err) {
-          console.error('Error loading Embedded Messaging: ', err);
-        }
-      };
-    </script>
-    <script type='text/javascript' src='https://storm-5771c771e313ed.my.site.com/ESWDataGouvExplorer1779625045202/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
   </div>
 
-  <footer>
-    Powered by Salesforce Agentforce
-  </footer>
+  <script type='text/javascript'>
+    function initEmbeddedMessaging() {
+      try {
+        embeddedservice_bootstrap.settings.language = 'fr';
+        embeddedservice_bootstrap.init(
+          '00DJ9000002Ft0p',
+          'DataGouv_Explorer',
+          'https://storm-5771c771e313ed.my.site.com/ESWDataGouvExplorer1779625045202',
+          {
+            scrt2URL: 'https://storm-5771c771e313ed.my.salesforce-scrt.com'
+          }
+        );
+
+        // Ouvre automatiquement le chat dès que le widget est prêt
+        window.addEventListener('onEmbeddedMessagingReady', () => {
+          document.getElementById('chat-loading').style.display = 'none';
+          embeddedservice_bootstrap.utilAPI.launchChat();
+        });
+
+      } catch (err) {
+        console.error('Error loading Embedded Messaging: ', err);
+        document.getElementById('chat-loading').textContent = 'Erreur lors du chargement de l\'agent.';
+      }
+    };
+  </script>
+  <script type='text/javascript'
+    src='https://storm-5771c771e313ed.my.site.com/ESWDataGouvExplorer1779625045202/assets/js/bootstrap.min.js'
+    onload='initEmbeddedMessaging()'>
+  </script>
 
 </body>
 </html>
