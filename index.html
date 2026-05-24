@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Démos Agents Agentforce</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f5f6fa;
+      color: #1a1a2e;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #032d60;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    header p {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.5rem;
+    }
+
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .agent-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid #e0e0e0;
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .agent-card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+    }
+
+    .agent-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .agent-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .agent-card p {
+      font-size: 0.88rem;
+      color: #666;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .agent-card .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      align-self: flex-start;
+    }
+
+    .badge-ready { background: #e3f6ec; color: #1a7a44; }
+    .badge-soon  { background: #f0f0f0; color: #888; }
+
+    .bg-blue   { background: #e8f0fe; }
+    .bg-green  { background: #e3f6ec; }
+    .bg-orange { background: #fff3e0; }
+    .bg-purple { background: #f3e8fd; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Démos Agents Agentforce</h1>
+    <p>Explorez les agents développés sur Salesforce Agentforce</p>
+  </header>
+
+  <main>
+    <h2>Agents disponibles</h2>
+    <div class="agents-grid">
+
+      <a class="agent-card" href="datagouv.html">
+        <div class="agent-icon bg-blue">🗂️</div>
+        <h3>Data Gouv Explorer</h3>
+        <p>Explorez le catalogue national de données ouvertes françaises. Recherchez des datasets, consultez leurs ressources et accédez aux APIs disponibles.</p>
+        <span class="badge badge-ready">Disponible</span>
+      </a>
+
+      <!-- Ajoutez vos prochains agents ici en dupliquant une card ci-dessus -->
+
+    </div>
+  </main>
+
+  <footer>
+    Powered by Salesforce Agentforce
+  </footer>
+
+</body>
+</html>
